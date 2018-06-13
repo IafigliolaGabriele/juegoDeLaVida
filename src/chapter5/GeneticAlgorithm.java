@@ -135,6 +135,7 @@ public class GeneticAlgorithm {
                     //We use roulette
                     
                     roulette = new Population(this.populationSize);
+                    population.shuffle();
                     
                     Individual[] individuals = population.getIndividuals();
                     double total_fit = population.getPopulationFitness();
@@ -148,13 +149,15 @@ public class GeneticAlgorithm {
                         normalizedProbabilityArray[i] = prev_probability;
                     }
                     
-                    double randomValue = new Random().nextDouble();
+                    
+                    
+                    double randomValue = new Random().nextDouble() * 1;
                     
                     int individualPosition=0;
                     
-                    for(int i =0 ; i<normalizedProbabilityArray.length ; i++){
-                        randomValue -= normalizedProbabilityArray[i];		
-                        if(randomValue < 0){
+                    for(int i =0 ; i < normalizedProbabilityArray.length ; i++){
+                       	
+                        if(randomValue < normalizedProbabilityArray[i]){
                             individualPosition = i;
                         }
                     }
