@@ -144,7 +144,8 @@ public class GeneticAlgorithm {
                     double prev_probability = 0;
                     
                     for(int i = 0; i < individuals.length; i++){
-                        normalizedProbabilityArray[i] = prev_probability + ( individuals[i].getFitness()/total_fit ) ;
+                        prev_probability = prev_probability + ( individuals[i].getFitness()/total_fit ) ;
+                        normalizedProbabilityArray[i] = prev_probability;
                     }
                     
                     double randomValue = new Random().nextDouble();
@@ -225,7 +226,7 @@ public class GeneticAlgorithm {
 				// Find second parent
                                 //If second parameter is true, selection is done via tournament
                                 //Else is done via roulette 
-				Individual parent2 = selectParent(population,true);
+				Individual parent2 = selectParent(population,false);
 
 				// Loop over genome
 				for (int geneIndex = 0; geneIndex < parent1.getChromosomeLength(); geneIndex++) {
