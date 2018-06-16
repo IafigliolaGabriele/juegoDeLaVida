@@ -10,6 +10,8 @@ public class GeneticAlgorithm {
 	private double crossoverRate;
 	private int elitismCount;
 	protected int tournamentSize;
+        private boolean cruce1=true; // cruce 1: escojo aleatoriamente por cada gen individual. cruce2: mitad de uno y mitaddel otro
+        private boolean flag=true; // true: torneo, false ruleta
 
 	public GeneticAlgorithm(int populationSize, double mutationRate, double crossoverRate, int elitismCount,
 			int tournamentSize) {
@@ -90,11 +92,13 @@ public class GeneticAlgorithm {
 
 		// Loop over population evaluating individuals and summing population
 		// fitness
+                float aux =0;
 		for (Individual individual : population.getIndividuals()) {
+                        aux++;
 			populationFitness += this.calcFitness(individual, timetable);
 		}
 
-		population.setPopulationFitness(populationFitness);
+		population.setPopulationFitness(populationFitness/aux);
 	}
 
 	/**
@@ -229,17 +233,36 @@ public class GeneticAlgorithm {
 				// Find second parent
                                 //If second parameter is true, selection is done via tournament
                                 //Else is done via roulette 
-				Individual parent2 = selectParent(population,false);
+				Individual parent2 = selectParent(population,flag);
 
 				// Loop over genome
-				for (int geneIndex = 0; geneIndex < parent1.getChromosomeLength(); geneIndex++) {
-					// Use half of parent1's genes and half of parent2's genes
-					if (0.5 > Math.random()) {
-						offspring.setGene(geneIndex, parent1.getGene(geneIndex));
-					} else {
-						offspring.setGene(geneIndex, parent2.getGene(geneIndex));
-					}
-				}
+                                if (cruce1){
+                                    for (int geneIndex = 0; geneIndex < parent1.getChromosomeLength(); geneIndex++) {
+                                            // Use half of parent1's genes and half of parent2's genes
+                                            if (0.5 > Math.random()) {
+                                                    offspring.setGene(geneIndex, parent1.getGene(geneIndex));
+                                            } else {
+                                                    offspring.setGene(geneIndex, parent2.getGene(geneIndex));
+                                            }
+                                    }
+                                } else{
+                                    boolean seleccion= (0.5> Math.random());
+                                    for(int geneIndex = 0; geneIndex < offspring.getChromosomeLength(); geneIndex++){
+                                        if (seleccion){
+                                            if(geneIndex < offspring.getChromosomeLength()/2){
+                                                offspring.setGene(geneIndex, parent1.getGene(geneIndex));
+                                            }else{
+                                                offspring.setGene(geneIndex, parent2.getGene(geneIndex));
+                                            }
+                                        } else{
+                                            if(geneIndex < offspring.getChromosomeLength()/2){
+                                                offspring.setGene(geneIndex, parent2.getGene(geneIndex));
+                                            }else{
+                                                offspring.setGene(geneIndex, parent1.getGene(geneIndex));
+                                            }
+                                        }
+                                    }
+                                }
 
 				// Add offspring to new population
 				newPopulation.setIndividual(populationIndex, offspring);
