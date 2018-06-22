@@ -74,6 +74,22 @@ public class JuegoDeLaVida {
 
     }
     
+    public void configuracionEstandar(int x, int y){
+        this.ancho = x;
+        this.largo = y;
+        field = new Celula[x][y];
+        for(int i=0;i<ancho;i++){
+            for(int j=0;j<largo;j++){
+                field[i][j]= new Celula();
+            }
+        }
+        //field[1][1].setEstaViva(true);
+        //field[1][2].setEstaViva(true);
+        //field[1][3].setEstaViva(true);
+        //field[5][5].setEstaViva(true);
+    }
+    
+    
     public void Vida(){
         while(true){
             for(int i=0;i<ancho;i++){
@@ -95,6 +111,7 @@ public class JuegoDeLaVida {
     }
     
     public int verificarAdyacencia(int x,int y){
+        
         int cantCelulasAdyacentesVivas;
         if(field[x][y].estaViva){
             cantCelulasAdyacentesVivas=-1;
@@ -132,6 +149,7 @@ public class JuegoDeLaVida {
     }
     
     public void cambiarGeneracion(){
+        System.out.println("Inicio Cambio");
         Accion accionActual;
         while(!acciones.empty()){
             accionActual = acciones.pop();
@@ -142,6 +160,7 @@ public class JuegoDeLaVida {
             }
         }
         generacion++;
+        System.out.println("Fin Cambio");
     }
     
     public void imprimirField(){
@@ -156,11 +175,62 @@ public class JuegoDeLaVida {
              System.out.println("");
         }
     }
-    
+
+    /*
     public static void main(String[] args) {
-        // TODO code application logic here
-        JuegoDeLaVida app = new JuegoDeLaVida();
-        app.Menu();
+    // TODO code application logic here
+    //JuegoDeLaVida app = new JuegoDeLaVida();
+    //app.Menu();
     }
+     */
+    public Celula[][] getField() {
+        return field;
+    }
+
+    public void setField(Celula[][] field) {
+        this.field = field;
+    }
+
+    public int getAncho() {
+        return ancho;
+    }
+
+    public void setAncho(int ancho) {
+        this.ancho = ancho;
+    }
+
+    public int getLargo() {
+        return largo;
+    }
+
+    public void setLargo(int largo) {
+        this.largo = largo;
+    }
+
+    public int getGeneracion() {
+        return generacion;
+    }
+
+    public void setGeneracion(int generacion) {
+        this.generacion = generacion;
+    }
+
+    public Scanner getSc() {
+        return sc;
+    }
+
+    public void setSc(Scanner sc) {
+        this.sc = sc;
+    }
+
+    public Stack<Accion> getAcciones() {
+        return acciones;
+    }
+
+    public void setAcciones(Stack<Accion> acciones) {
+        this.acciones = acciones;
+    }
+    
+    
     
 }
