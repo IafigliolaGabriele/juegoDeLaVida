@@ -19,15 +19,17 @@ public class CicloVital extends Thread{
 
     private javax.swing.JPanel cuerpo;   // Cuadro de texto en la interfaz donde se imprime el estado actual del presidente
     private GridBagConstraints ubicacion;
+    private javax.swing.JLabel tgeneracion;
     private JuegoDeLaVida juego;
     private boolean test;
     
-    public CicloVital(javax.swing.JPanel cuerpo){
+    public CicloVital(javax.swing.JPanel cuerpo, javax.swing.JLabel tgen){
         this.cuerpo = cuerpo;
         ubicacion = new GridBagConstraints();
         juego = new JuegoDeLaVida();
-        juego.configuracionEstandar(50,100);
+        juego.configuracionEstandar(40,40);
         test = true;
+        tgeneracion = tgen;
         this.construirGrid();
     }
     
@@ -65,6 +67,7 @@ public class CicloVital extends Thread{
     
     @Override
        public void run(){
+           int generacion=0;
         while(true){
             System.out.println("tan");
             try { 
@@ -73,9 +76,8 @@ public class CicloVital extends Thread{
                         this.juego.verificarAdyacencia(i,j);
                     }
                 }   
-                this.juego.cambiarGeneracion();
-                //this.juego.imprimirField();
-                //this.pintar();
+                generacion = this.juego.cambiarGeneracion();
+                this.tgeneracion.setText(Integer.toString(generacion));
                 System.out.println("Pintar");
                 for(int i=0;i<juego.getAncho();i++){
                     for(int j=0;j<juego.getLargo();j++){
@@ -87,10 +89,8 @@ public class CicloVital extends Thread{
                         }
                     }
                 }
-        test = !test;
         this.cuerpo.updateUI();
-        
-                Thread.sleep(250);
+                Thread.sleep(2000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(CicloVital.class.getName()).log(Level.SEVERE, null, ex);
             }

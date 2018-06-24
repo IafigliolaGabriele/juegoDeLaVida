@@ -30,49 +30,50 @@ public class JuegoDeLaVida {
     private Scanner sc = new Scanner(System.in);
     private Stack<Accion> acciones = new Stack<Accion>();
     /// 1 morir, 2 nada, 3 procrear
-    public void Menu(){
-        int x=0,y=0;
-        generacion=0;
-        System.out.println("Ingrese el ancho del campo(x)");
-        x = sc.nextInt();
-        ancho = x;
-        System.out.println("Ingrese el largo del campo(y)");
-        y = sc.nextInt();
-        largo=y;
-        field = new Celula[x][y];
-        double probability;
-        for(int i=0;i<x;i++){
-            for(int j=0;j<y;j++){
-                field[i][j]= new Celula();
-                probability = Math.random();
-                if(probability<-1){
-                    field[i][j].setEstaViva(true);
-                }
-            }
-        }
-        
-        field[5][5].setEstaViva(true);
-        field[6][5].setEstaViva(true);
-        field[7][5].setEstaViva(true);
-        field[5][6].setEstaViva(true);
-        field[6][6].setEstaViva(true);
-        field[7][6].setEstaViva(true);
-        
-        field[9][5].setEstaViva(true);
-        field[10][5].setEstaViva(true);
-        field[9][6].setEstaViva(true);
-        field[10][6].setEstaViva(true);
-        field[9][7].setEstaViva(true);
-        field[10][7].setEstaViva(true);
-        field[9][8].setEstaViva(true);
-        field[10][8].setEstaViva(true);
-        
-        System.out.println("-------------------------- Generacion "+generacion+"-------------------------------------");
-        this.imprimirField();
-        System.out.println("-----------------------------------------------------------------------------------------");
-        this.Vida();
-
-    }
+//    public void Menu(){
+//        int x=0,y=0;
+//        generacion=0;
+//        System.out.println("Ingrese el ancho del campo(x)");
+//        x = sc.nextInt();
+//        ancho = x;
+//        System.out.println("Ingrese el largo del campo(y)");
+//        y = sc.nextInt();
+//        largo=y;
+//        field = new Celula[x][y];
+//        double probability;
+//        for(int i=0;i<x;i++){
+//            for(int j=0;j<y;j++){
+//                field[i][j]= new Celula();
+//                probability = Math.random();
+//                if(probability<-1){
+//                    field[i][j].setEstaViva(true);
+//                }
+//            }
+//        }
+//        
+//        field[5][5].setEstaViva(true);
+//        field[6][5].setEstaViva(true);
+//        field[7][5].setEstaViva(true);
+//        field[5][6].setEstaViva(true);
+//        field[6][6].setEstaViva(true);
+//        field[7][6].setEstaViva(true);
+//        
+//        field[9][5].setEstaViva(true);
+//        field[10][5].setEstaViva(true);
+//        field[9][6].setEstaViva(true);
+//        field[10][6].setEstaViva(true);
+//        field[9][7].setEstaViva(true);
+//        field[10][7].setEstaViva(true);
+//        field[9][8].setEstaViva(true);
+//        field[10][8].setEstaViva(true);
+//        
+//        System.out.println("-------------------------- Generacion "+generacion+"-------------------------------------");
+//        this.imprimirField();
+//        System.out.println("-----------------------------------------------------------------------------------------");
+//        this.Vida();
+//
+//    }
+//    
     
     public void configuracionEstandar(int x, int y){
         this.ancho = x;
@@ -83,32 +84,29 @@ public class JuegoDeLaVida {
                 field[i][j]= new Celula();
             }
         }
-        //field[1][1].setEstaViva(true);
-        //field[1][2].setEstaViva(true);
-        //field[1][3].setEstaViva(true);
-        //field[5][5].setEstaViva(true);
     }
     
     
-    public void Vida(){
-        while(true){
-            for(int i=0;i<ancho;i++){
-                for(int j=0;j<largo;j++){
-                    this.verificarAdyacencia(i,j);
-                }
-            }
-            this.cambiarGeneracion();
-            System.out.println("-------------------------- Generacion "+generacion+"-------------------------------------");
-            this.imprimirField();
-            System.out.println("-----------------------------------------------------------------------------------------");
-        
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(JuegoDeLaVida.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
+//    public void Vida(){
+//        while(true){
+//            for(int i=0;i<ancho;i++){
+//                for(int j=0;j<largo;j++){
+//                    this.verificarAdyacencia(i,j);
+//                }
+//            }
+//            this.cambiarGeneracion();
+//            System.out.println("-------------------------- Generacion "+generacion+"-------------------------------------");
+//            this.imprimirField();
+//            System.out.println("-----------------------------------------------------------------------------------------");
+//        
+//            try {
+//                Thread.sleep(500);
+//            } catch (InterruptedException ex) {
+//                Logger.getLogger(JuegoDeLaVida.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+//    }
+//    
     
     public int verificarAdyacencia(int x,int y){
         
@@ -148,7 +146,7 @@ public class JuegoDeLaVida {
         }
     }
     
-    public void cambiarGeneracion(){
+    public int cambiarGeneracion(){
         System.out.println("Inicio Cambio");
         Accion accionActual;
         while(!acciones.empty()){
@@ -161,8 +159,9 @@ public class JuegoDeLaVida {
         }
         generacion++;
         System.out.println("Fin Cambio");
+        return generacion;
     }
-    
+    /*
     public void imprimirField(){
          for(int i=0;i<ancho;i++){
             for(int j=0;j<largo;j++){
@@ -175,7 +174,7 @@ public class JuegoDeLaVida {
              System.out.println("");
         }
     }
-
+*/
     /*
     public static void main(String[] args) {
     // TODO code application logic here

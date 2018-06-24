@@ -6,6 +6,7 @@
 
 package Interfaz;
 
+import javax.swing.JLabel;
 import juegodelavida.CicloVital;
 import juegodelavida.JuegoDeLaVida;
 
@@ -24,7 +25,7 @@ public class Ecosistema extends javax.swing.JFrame {
     
     public Ecosistema() {
         initComponents();
-        ciclo = new CicloVital(this.Tierra);
+        ciclo = new CicloVital(this.Tierra, this.tGeneration);
     }
 
     /**
@@ -38,6 +39,8 @@ public class Ecosistema extends javax.swing.JFrame {
 
         Tierra = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        tGeneration = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,20 +54,31 @@ public class Ecosistema extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Generación");
+
+        tGeneration.setText("XXXXXXXXX");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Tierra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(478, 478, 478)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jButton1)
-                .addGap(137, 137, 137))
+                .addGap(147, 147, 147)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(tGeneration, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(328, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jLabel1)
+                    .addComponent(tGeneration))
                 .addGap(7, 7, 7)
                 .addComponent(Tierra, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
                 .addContainerGap())
@@ -79,6 +93,14 @@ public class Ecosistema extends javax.swing.JFrame {
         this.ciclo.start();
         this.jButton1.setEnabled(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    public JLabel gettGeneration() {
+        return tGeneration;
+    }
+
+    public void settGeneration(JLabel tGeneration) {
+        this.tGeneration = tGeneration;
+    }
 
     /**
      * @param args the command line arguments
@@ -118,5 +140,7 @@ public class Ecosistema extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Tierra;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel tGeneration;
     // End of variables declaration//GEN-END:variables
 }
